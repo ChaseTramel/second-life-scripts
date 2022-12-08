@@ -1,22 +1,22 @@
 // other vars
 
 // soonest poster, front top placement
-integer firstPosterFace = 4;  // Charlie Brown Movie
-key firstPosterImage = "Charlie Brown";
-string firstPosterMessage = "Join us for two showings of A Charlie Brown Thanksgiving on November 19th.";
-string firstPosterURL = "https://discord.gg/WeyjhYr7?event=1041132597184561172";
+integer firstPosterFace = 4;  // Cookie Decorating
+key firstPosterImage = "Cookie Decorating";
+string firstPosterMessage = "Get ready for a sugary good time on Saturday at 4pm SLT!";
+string firstPosterURL = "https://discord.gg/Uts3fJf8?event=1046545276925653012";
 
 // second soonest poster, front bottom placement
-integer secondPosterFace  = 6;  // Friendsgiving
-string secondPosterImage = "Friendsgiving";
-string secondPosterMessage = "Ready to celebrate with your found family in Fox Hollow on the 23rd?";
-string secondPosterURL = "https://discord.gg/5ezDuXZA?event=1043259000013201468";
+integer secondPosterFace  = 6;  // Fantasy in Lights
+string secondPosterImage = "Fantasy in Lights";
+string secondPosterMessage = "Celebrate the season with this walk through community light display opening December 7th at 6pm SLT!";
+string secondPosterURL = "https://discord.gg/B3yqcRHQ?event=1046549730357944380";
 
 // furthest poster, top back placement
-integer thirdPosterFace = 3;  // Gratitude Gala
-key thirdPosterImage = "Gratitude Gala";
-string thirdPosterMessage = "A formal event celebrating our gratitude in this amazing community.";
-string thirdPosterURL = "";
+integer thirdPosterFace = 3;  // Tree Farm
+key thirdPosterImage = "Tree Farm";
+string thirdPosterMessage = "Join us for sled rides, hot cocoa, and more winter fun on December 10th at noon SLT!";
+string thirdPosterURL = "https://discord.gg/TetYHBHd?event=1047999168817406033";
 
 // general promo poster, bottom back placement
 integer serverPromoFace = 5;  //General Promo, Winter
