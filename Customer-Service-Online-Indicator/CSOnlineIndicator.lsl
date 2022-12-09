@@ -30,7 +30,7 @@ default
             return;
         } else {
             llInstantMessage(toucher, "The owner is offline. Here's a notecard with her contact information. Please contact her describing your issue!");
-            llGiveInventory(toucher, "Littlepaw Customer Service Contact Information");
+            llGiveInventory(toucher, "Littlepaws Customer Service Contact Information");
         }
     }
         

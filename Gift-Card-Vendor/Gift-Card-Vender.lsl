@@ -37,7 +37,7 @@ default
         llRequestPermissions(llGetOwner(), PERMISSION_DEBIT);
         llSetPayPrice(PAY_HIDE, [smallPrice, mediumPrice, largePrice, PAY_HIDE]);
     }
-    money( key buyer, integer amountPaid) {
+    money(key buyer, integer amountPaid) {
         integer purchasedItem = WhichItem(amountPaid); 
         if (purchasedItem == 0) {
             llInstantMessage(buyer, "That's not enough money, sorry.");
