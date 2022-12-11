@@ -7,54 +7,25 @@ float off = 0.0;
 integer counter;
 
 FlyingSounds() {
-    counter++;
-    if (EvenNumber(counter)) {
-        play sound 1
-        return;
-    } else {
-        play sound 2
-        return;
-    }
+    llLoopSound("Flying Bells", high);
 }
 HoverSounds() {
-    counter++;
-    if (DivisibleByFive == 1) {
-        play 2;
-        return;
-    } else {
-        return;
-    }
+    llLoopSound("Hover Bells", med);
 }
 WalkingSounds() {
-    loop walking
+    llLoopSound("Footsteps", med);
 }
 NoSounds() {
-    stop all sounds
+    llStopSound();
 }
 
-integer EvenNumber(integer number) {
- if (number % 2 == 0) {
-    // llOwnerSay(string(number) + "is even ");
-    return 1;
- } else {
-    // llOwnerSay(string(number) + "is odd ");
-    return 0;
- }
-}
-integer DivisibleByFive(integer number) {
-    if (number % 5 == 0) {
-        return 1;
-    } else {
-        return 0;
-    }
-}
 default {
     on_rez( integer param) {
         llResetScript();
     }
     state_entry() {
         NoSounds();
-        counter = 0;
+        llCollisionSound("Snort", low);
         llSetTimerEvent(.5);
     }
     moving_start() {
@@ -62,6 +33,7 @@ default {
         // llOwnerSay("Moving!");
     }
     moving_end(){
+        llStopSound();
         moving = FALSE;
         // llOwnerSay("Not moving!");
     }
@@ -71,7 +43,6 @@ default {
         } else if (llGetAgentInfo(llGetOwner()) & AGENT_FLYING) {
             HoverSounds();
         } else if (moving) {
-            counter = 0;
             WalkingSounds();
         } else {
             NoSounds();
