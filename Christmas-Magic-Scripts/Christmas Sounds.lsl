@@ -6,37 +6,30 @@ float low = 0.4;
 float off = 0.0;
 integer counter;
 
-QuickNoseBlink() {
+FlyingSounds() {
     counter++;
     if (EvenNumber(counter)) {
-        llSetPrimitiveParams([
-            PRIM_GLOW, ALL_SIDES, high,
-            PRIM_POINT_LIGHT, TRUE, red, high, 3, .75 ]);
+        play sound 1
         return;
     } else {
-        SteadyNose();
+        play sound 2
+        return;
     }
 }
-SlowNoseBlink() {
+HoverSounds() {
     counter++;
-    if (NotDivisibleByFive(counter)) {
-        llSetPrimitiveParams([
-            PRIM_GLOW, ALL_SIDES, med,
-            PRIM_POINT_LIGHT, TRUE, red, med, 3, .75 ]);
+    if (DivisibleByFive == 1) {
+        play 2;
+        return;
     } else {
-        SteadyNose();
+        return;
     }
 }
-
-SteadyNose() {
-    llSetPrimitiveParams([
-        PRIM_GLOW, ALL_SIDES, low,
-        PRIM_POINT_LIGHT, TRUE, red, low, 3, .75 ]);
+WalkingSounds() {
+    loop walking
 }
-OffNose() {
-    llSetPrimitiveParams([
-        PRIM_GLOW, ALL_SIDES, off,
-        PRIM_POINT_LIGHT, TRUE, red, off, 3, .75 ]);
+NoSounds() {
+    stop all sounds
 }
 
 integer EvenNumber(integer number) {
@@ -48,11 +41,11 @@ integer EvenNumber(integer number) {
     return 0;
  }
 }
-integer NotDivisibleByFive(integer number) {
+integer DivisibleByFive(integer number) {
     if (number % 5 == 0) {
-        return 0;
-    } else {
         return 1;
+    } else {
+        return 0;
     }
 }
 default {
@@ -60,7 +53,7 @@ default {
         llResetScript();
     }
     state_entry() {
-        SteadyNose();
+        NoSounds();
         counter = 0;
         llSetTimerEvent(.5);
     }
@@ -74,14 +67,14 @@ default {
     }
     timer() {
         if (llGetAgentInfo(llGetOwner()) & AGENT_FLYING & moving) {
-            // llOwnerSay("Christmas magic!");
-            QuickNoseBlink();
+            FlyingSounds();
         } else if (llGetAgentInfo(llGetOwner()) & AGENT_FLYING) {
-            SlowNoseBlink();
-        } else {
-            // llOwnerSay("No magic.");
+            HoverSounds();
+        } else if (moving) {
             counter = 0;
-            SteadyNose();
+            WalkingSounds();
+        } else {
+            NoSounds();
         }
     }
 }
