@@ -1,4 +1,3 @@
-key owner;
 integer moving;
 float high = 0.8;
 float med = 0.6;
@@ -42,7 +41,7 @@ default {
             FlyingSounds();
         } else if (llGetAgentInfo(llGetOwner()) & AGENT_FLYING) {
             HoverSounds();
-        } else if (moving) {
+        } else if (llGetAgentInfo(llGetOwner()) & AGENT_WALKING) {
             WalkingSounds();
         } else {
             NoSounds();

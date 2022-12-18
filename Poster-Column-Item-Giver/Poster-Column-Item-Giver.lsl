@@ -1,22 +1,22 @@
 // other vars
 
 // soonest poster, front top placement
-integer firstPosterFace = 4;  // Tree Farm
-key firstPosterImage = "Tree Farm";
-string firstPosterMessage = "Join us for cider, hot cocoa, sled rides, and so much more winter fun on December 10th at noon SLT!";
-string firstPosterURL = "https://discord.gg/JsNErxDA?event=1047999168817406033";
+integer firstPosterFace = 4;  // Yule Ball
+key firstPosterImage = "Yule Ball";
+string firstPosterMessage = "Let's welcome in the changing of the seasons with live entertainment and drinks amount friends!";
+string firstPosterURL = "https://discord.gg/VV8pyHSf?event=1053399105646366872";
 
 // second soonest poster, front bottom placement
-integer secondPosterFace  = 6;  // Polar Express
-string secondPosterImage = "Polar Express";
-string secondPosterMessage = "";
-string secondPosterURL = "";
+integer secondPosterFace  = 6;  // Ugly Christmas Sweater Party
+string secondPosterImage = "Ugly Sweater";
+string secondPosterMessage = "Join us to celebrate the cheesy and cliche parts of Christmas with this fun social!";
+string secondPosterURL = "https://discord.gg/VV8pyHSf?event=1053400731492810782";
 
 // furthest poster, top back placement
-integer thirdPosterFace = 3;  // Christmas Caroling
-key thirdPosterImage = "Caroling";
-string thirdPosterMessage = "";
-string thirdPosterURL = "";
+integer thirdPosterFace = 3;  // NYE Ball
+key thirdPosterImage = "NYE Ball";
+string thirdPosterMessage = "Ring in the new year with all your friends and family from Fox Hollow!";
+string thirdPosterURL = "https://discord.gg/VV8pyHSf?event=1053422714452459570";
 
 // general promo poster, bottom back placement
 integer serverPromoFace = 5;  //General Promo, Winter

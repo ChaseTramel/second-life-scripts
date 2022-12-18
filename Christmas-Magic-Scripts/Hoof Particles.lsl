@@ -1,4 +1,3 @@
-key owner;
 integer moving;
 string magic = "f4895088-5107-1568-d169-553d5a6dbf17";
 

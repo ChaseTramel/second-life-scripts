@@ -10,8 +10,6 @@ default {
                 if (llGetInventoryPermMask(itemName, MASK_OWNER) & PERM_COPY) {
                     inventoryItems += itemName;
                 }
-            } else {
-                llOwnerSay("Unable to copy " + itemName);
             }
         }
         if (inventoryItems == []) {

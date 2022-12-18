@@ -1,4 +1,3 @@
-key owner;
 integer moving;
 float high = 0.8;
 float med = 0.6;
