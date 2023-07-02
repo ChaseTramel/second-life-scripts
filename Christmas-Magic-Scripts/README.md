@@ -1,13 +1,13 @@
-Looking to add a little magic to your Christmas experience? Look no further!
+I developed this in LSL for the game Second Life. It incorporates the following: 
 
 - Christmas Magic Sparkle Hooves
 These produce magical Christmas sparkles when flying. The sparkles are different for hovering versus moving. There are four to attach one to each hoof.
 
 - Rudolf Blinking Red Nose
-This adds a red glow and red light to your nose, which can compliment a red skin color if you've followed the TWI Deer Rudolf Reindeer Shape & Style Card, also available from Littlepaws The light is steady when you're on the ground, blinks slowly when you're hovering, and blinks quickly when you're flying.
+This adds a red glow and red light to the avatar's nose. The light is steady when the avatar is on the ground, blinks slowly when the avatar is hovering, and blinks quickly when the avatar is flying.
 
 - Reindeer Sounds Generator
-This attaches to your chest to create sounds. It creates sleigh bell sounds when you're flying and hovering, but the hovering bells are slower and quieter than the active flying ones. It also produces reindeer walking sounds when you walk, and has replaced your bumper sounds with a quiet reindeer snort.
+This attaches to the avatar's chest to create sounds. It creates sleigh bell sounds when the avatar is flying and hovering, but the hovering bells are slower and quieter than the active flying ones. It also produces reindeer walking sounds when the avatar walks, and has replaced the avatar's bumper sounds with a quiet reindeer snort.
 
 https://github.com/ChaseTramel/second-life-scripts/assets/94766362/0437edc2-122c-4081-980b-4133db3d2f38
 
