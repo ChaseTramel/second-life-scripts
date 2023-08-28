@@ -1,48 +1,34 @@
+string blank = "8dcd4a48-2d37-4909-9f78-f7a9eb4ef903";
+// page 0 is blank
+// page number is cover
+
+integer countTextures() {
+    integer pages = llGetInventoryNumber( INVENTORY_TEXTURE );
+    return pages;
+}
+
+integer currentPage () {
+    integer currentPage = (integer)llGetTexture(ALL_SIDES);
+    return currentPage;
+}
+
 default
 {
     state_entry() {
-        string Blank = "8dcd4a48-2d37-4909-9f78-f7a9eb4ef903";
-        llSetTexture(Blank, 1);
+        countTextures();
+        llSetTexture(blank, ALL_SIDES);
     }
-
-    touch_start(integer toucherQuant) {
-        string Blank = "8dcd4a48-2d37-4909-9f78-f7a9eb4ef903";
-        if (llGetTexture(1) == "Cover") {
-            llSetTexture("4", 1);
-            llMessageLinked(LINK_ALL_OTHERS, 4, "", "");
-        } else if (llGetTexture(1) == "4") {
-            llSetTexture("3", 1);
-            llMessageLinked(LINK_ALL_OTHERS, 3, "", "");
-        } else if (llGetTexture(1) == "3") {
-            llSetTexture("2", 1);
-            llMessageLinked(LINK_ALL_OTHERS, 2, "", "");
-        } else if (llGetTexture(1) == "2") {
-            llSetTexture("1", 1);
-            llMessageLinked(LINK_ALL_OTHERS, 1, "", "");
-        } else if (llGetTexture(1) == "1") {
-            llSetTexture(Blank, 1);
-            llMessageLinked(LINK_ALL_OTHERS, 5, "", "");
-        } else {
-            llSetTexture("Cover", 1);
-            llMessageLinked(LINK_ALL_OTHERS, 0, "", "");
-        }
-    }
-    link_message(integer source, integer page, string str, key id)
-    {
-        string Blank = "8dcd4a48-2d37-4909-9f78-f7a9eb4ef903";
-        if (page == 1) {
-            llSetTexture("1", 1);
-        } else if (page == 2) {
-            llSetTexture("2", 1);
-        } else if (page == 3) {
-            llSetTexture("3", 1);
-        } else if (page == 4) {
-            llSetTexture("4", 1);
-        } else if (page == 0) {
-            llSetTexture(Blank, 1);
-        } else {
-            llSetTexture("Cover", 1);
+    touch_start(integer toucherQuant){
+        integer numberOfPages = countTextures();
+        if (llGetTexture(ALL_SIDES) == blank) {  // if blank
+            llSetTexture((string)numberOfPages, ALL_SIDES);  //set to cover
+            llMessageLinked(LINK_ALL_OTHERS, currentPage(), "", "");
+        } else if (currentPage() - 1 == 0){  // if on the last page
+            llSetTexture(blank, ALL_SIDES);  //set to bkank
+            llMessageLinked(LINK_ALL_OTHERS, currentPage(), "", "");
+        } else {  //otherwise, you're in the middle of the book
+            llSetTexture((string)(currentPage() - 1), ALL_SIDES);
+            llMessageLinked(LINK_ALL_OTHERS, currentPage(), "", "");
         }
     }
 }
-
