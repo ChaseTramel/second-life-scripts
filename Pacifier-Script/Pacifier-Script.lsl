@@ -1,7 +1,17 @@
-vector startVector = <0.0,309.0,90.0>;
+vector startVector = <0.0,312.0,90.0>;
 vector inVector = <0.0,303.0,90.0>;
 rotation startRotation;
 rotation inRotation;
+
+vector startPosition = <0.045,0.0,-0.029>;
+vector inPosition = <0.043,0.0,-0.029>;
+
+integer slow = FALSE;
+
+float slowTimer = 2;
+float slowSleep = 1;
+float fastTimer = 1;
+float fastSleep = 0.5;
 
 rotation setUp (vector initial) {
         vector radians = initial*DEG_TO_RAD; // Change to Radians
@@ -14,13 +24,15 @@ default
     {
         startRotation = setUp(startVector);
         inRotation = setUp(inVector);
-        llSetTimerEvent(2);
+        llSetTimerEvent(fastTimer);
     }
 
     timer()
     {
         llSetRot(inRotation);
-        llSleep(2);
+        llSetPos(inPosition);
+        llSleep(fastSleep);
         llSetRot(startRotation);
+        llSetPos(startPosition);
     }
 }
