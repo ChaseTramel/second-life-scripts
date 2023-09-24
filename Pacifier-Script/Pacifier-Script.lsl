@@ -8,7 +8,7 @@ integer sucked = FALSE;
 
 integer volume = TRUE;
 
-integer slow = TRUE;
+integer slow = FALSE;
 float currentSleep;
 
 float slowTimer = 1;
@@ -17,8 +17,7 @@ float slowSleep = 0.5;
 float fastTimer = 0.5;
 float fastSleep = 0.25;
 
-float softVolume = 0.2;
-float noVolume = 0.0;
+float volumeLevel = 0.3;
 
 rotation covertRotation (vector initial) {
         vector radians = initial*DEG_TO_RAD; // Change to Radians
@@ -56,7 +55,7 @@ default
             sucked = TRUE;
         } else {
             if (volume == TRUE) {
-                llPlaySound("Sound", softVolume);
+                llPlaySound("Sound", volumeLevel);
             }
             llSetLinkPrimitiveParams(0,[
                 PRIM_ROT_LOCAL, llGetLocalRot() / rotationChange,
