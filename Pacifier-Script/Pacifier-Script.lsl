@@ -5,7 +5,7 @@ vector positionChange = <0.004,0.0,0.0>;
 
 integer sucked = FALSE;
 
-integer volume = TRUE;
+integer volume;
 
 integer slow;
 float currentSleep;
@@ -26,8 +26,8 @@ rotation covertRotation (vector initial) {
 }
 
 dialogPrompt (key toucher) {
-    llDialog(toucher, dialogMenu, dialogChoices, dialogChannel);  // Create dialog box
     llListenRemove(listener);  // Remove listener if one exists
+    llDialog(toucher, dialogMenu, dialogChoices, dialogChannel);  // Create dialog box
     listener = llListen(dialogChannel, "", toucher, "");  // Create listener
     return;
 }
@@ -38,7 +38,9 @@ default
     {
         rotationChange = covertRotation(rotationAmount);
         dialogChannel = -1 - (integer)("0x" + llGetSubString( (string) llGetKey(), -7, -1) );  // Create random negative channel for dialog
-        llSetTimerEvent(slowTimer);  // Default to slow speed
+        llSetTimerEvent(slowTimer);
+        slow = TRUE;  // Default to slow speed
+        volume = TRUE; // Default to volume on
     }
 
     touch(integer toucher)
@@ -71,16 +73,20 @@ default
     listen( integer channel, string name, key id, string message )
     {
         if (message == "Sound Toggle" && volume == FALSE) {
+            llOwnerSay("Turning on volume");
             volume = TRUE;
             llListenRemove(listener);
         } else if (message == "Sound Toggle" && volume == TRUE) {
+            llOwnerSay("Turning off volume");
             volume = FALSE;
             llListenRemove(listener);
         } else if (message == "Speed Toggle" && slow == FALSE) {
+            llOwnerSay("Turning on slow mode");
             slow = TRUE;
             llSetTimerEvent(slowTimer);
             llListenRemove(listener);
         } else if (message == "Speed Toggle" && slow == TRUE) {
+            llOwnerSay("Turning on fast mode");
             slow = FALSE;
             llSetTimerEvent(fastTimer);
             llListenRemove(listener);
