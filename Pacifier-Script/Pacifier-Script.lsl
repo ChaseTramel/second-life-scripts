@@ -17,11 +17,23 @@ float slowSleep = 0.5;
 float fastTimer = 0.5;
 float fastSleep = 0.25;
 
-float volumeLevel = 0.3;
+float volumeLevel = 0.4;
+
+string dialogMenu = "Choose from the options below:";
+list dialogChoices = ["Speed Toggle", "Sound Toggle"];
+integer dialogChannel;
+integer listener;
 
 rotation covertRotation (vector initial) {
         vector radians = initial*DEG_TO_RAD; // Change to Radians
         return llEuler2Rot(radians); // Change to a Rotation
+}
+
+dialogPrompt (key toucher) {
+    llDialog(toucher, dialogMenu, dialogChoices, dialogChannel);
+    llListenRemove(listener);
+    listener = llListen(dialogChannel, "", toucher, "");
+    return;
 }
 
 default
@@ -29,18 +41,16 @@ default
     state_entry()
     {
         rotationChange = covertRotation(rotationAmount);
+        dialogChannel = -1 - (integer)("0x" + llGetSubString( (string) llGetKey(), -7, -1) );
+        llSetTimerEvent(slowTimer);
+        currentSleep = slowSleep;
     }
 
     touch(integer toucher)
     {
-        if (llDetectedKey(0) == llGetOwner()) {
-            if (slow == TRUE) {
-                llSetTimerEvent(slowTimer);
-                currentSleep = slowSleep;
-            } else {
-                llSetTimerEvent(fastTimer);
-                currentSleep = fastSleep;
-            }
+        key toucher = llDetectedKey(0);
+        if (toucher == llGetOwner()) {
+            dialogPrompt(toucher);
         }
         
     }
@@ -63,5 +73,25 @@ default
             sucked = FALSE;
         }
         
+    }
+    listen( integer channel, string name, key id, string message )
+    {
+        if (message == "Sound Toggle" && volume == FALSE) {
+            volume = TRUE;
+            llListenRemove(listener);
+        } else if (message == "Sound Toggle" && volume == TRUE) {
+            volume = FALSE;
+            llListenRemove(listener);
+        } else if (message == "Speed Toggle" && slow == FALSE) {
+            slow = TRUE;
+            llSetTimerEvent(slowTimer);
+            currentSleep = slowSleep;
+            llListenRemove(listener);
+        } else if (message == "Speed Toggle" && slow == TRUE) {
+            slow = FALSE;
+            llSetTimerEvent(fastTimer);
+            currentSleep = fastSleep;
+            llListenRemove(listener);
+        }
     }
 }
