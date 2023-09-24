@@ -3,19 +3,15 @@ rotation rotationChange;
 
 vector positionChange = <0.004,0.0,0.0>;
 
-
 integer sucked = FALSE;
 
 integer volume = TRUE;
 
-integer slow = FALSE;
+integer slow;
 float currentSleep;
 
 float slowTimer = 1;
-float slowSleep = 0.5;
-
 float fastTimer = 0.5;
-float fastSleep = 0.25;
 
 float volumeLevel = 0.4;
 
@@ -30,9 +26,9 @@ rotation covertRotation (vector initial) {
 }
 
 dialogPrompt (key toucher) {
-    llDialog(toucher, dialogMenu, dialogChoices, dialogChannel);
-    llListenRemove(listener);
-    listener = llListen(dialogChannel, "", toucher, "");
+    llDialog(toucher, dialogMenu, dialogChoices, dialogChannel);  // Create dialog box
+    llListenRemove(listener);  // Remove listener if one exists
+    listener = llListen(dialogChannel, "", toucher, "");  // Create listener
     return;
 }
 
@@ -41,9 +37,8 @@ default
     state_entry()
     {
         rotationChange = covertRotation(rotationAmount);
-        dialogChannel = -1 - (integer)("0x" + llGetSubString( (string) llGetKey(), -7, -1) );
-        llSetTimerEvent(slowTimer);
-        currentSleep = slowSleep;
+        dialogChannel = -1 - (integer)("0x" + llGetSubString( (string) llGetKey(), -7, -1) );  // Create random negative channel for dialog
+        llSetTimerEvent(slowTimer);  // Default to slow speed
     }
 
     touch(integer toucher)
@@ -58,13 +53,12 @@ default
     timer()
     {
         if (sucked == FALSE) {
-            llSetLinkPrimitiveParams(0,[
+            llSetLinkPrimitiveParams(0,[  // Used to rotate and change position at same time
                 PRIM_ROT_LOCAL, llGetLocalRot() * rotationChange,
                 PRIM_POS_LOCAL, llGetLocalPos() + positionChange]);
-            llSleep(fastSleep);
             sucked = TRUE;
         } else {
-            if (volume == TRUE) {
+            if (volume == TRUE) {  // If sound is on, play sound
                 llPlaySound("Sound", volumeLevel);
             }
             llSetLinkPrimitiveParams(0,[
@@ -85,12 +79,10 @@ default
         } else if (message == "Speed Toggle" && slow == FALSE) {
             slow = TRUE;
             llSetTimerEvent(slowTimer);
-            currentSleep = slowSleep;
             llListenRemove(listener);
         } else if (message == "Speed Toggle" && slow == TRUE) {
             slow = FALSE;
             llSetTimerEvent(fastTimer);
-            currentSleep = fastSleep;
             llListenRemove(listener);
         }
     }
