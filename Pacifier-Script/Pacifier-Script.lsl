@@ -1,7 +1,13 @@
+// Created by Kasey Littlepaws for Lily Grace of Lovey
+// For sound, add a sound file named "Sound" in the contents of the object
+
+
 vector rotationAmount = <0.0,009.0,0.0>;
 rotation rotationChange;
 
 vector positionChange = <0.004,0.0,0.0>;
+
+integer on = TRUE;
 
 integer sucked = FALSE;
 
@@ -16,7 +22,7 @@ float fastTimer = 0.5;
 float volumeLevel = 0.4;
 
 string dialogMenu = "Choose from the options below:";
-list dialogChoices = ["Speed Toggle", "Sound Toggle"];
+list dialogChoices = ["Speed Toggle", "Sound Toggle", "On / Off"];
 integer dialogChannel;
 integer listener;
 
@@ -73,22 +79,27 @@ default
     listen( integer channel, string name, key id, string message )
     {
         if (message == "Sound Toggle" && volume == FALSE) {
-            llOwnerSay("Turning on volume");
             volume = TRUE;
             llListenRemove(listener);
         } else if (message == "Sound Toggle" && volume == TRUE) {
-            llOwnerSay("Turning off volume");
             volume = FALSE;
             llListenRemove(listener);
         } else if (message == "Speed Toggle" && slow == FALSE) {
-            llOwnerSay("Turning on slow mode");
             slow = TRUE;
             llSetTimerEvent(slowTimer);
             llListenRemove(listener);
         } else if (message == "Speed Toggle" && slow == TRUE) {
-            llOwnerSay("Turning on fast mode");
             slow = FALSE;
             llSetTimerEvent(fastTimer);
+            llListenRemove(listener);
+        } else if (message == "On / Off" && on == TRUE) {
+            on = FALSE;
+            llSetTimerEvent(0.0);
+            llListenRemove(listener);
+        } else if (message == "On / Off" && on == FALSE) {
+            on = TRUE;
+            llSetTimerEvent(slowTimer);
+            volume = TRUE;
             llListenRemove(listener);
         }
     }
