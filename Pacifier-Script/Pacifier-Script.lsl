@@ -2,10 +2,10 @@
 // For sound, add a sound file named "Sound" in the contents of the object
 
 
-vector rotationAmount = <0.0,009.0,0.0>;
+vector rotationAmount = <0.0,006.8,0.0>;
 rotation rotationChange;
 
-vector positionChange = <0.004,0.0,0.0>;
+vector positionChange = <0.003,0.0,0.0>;
 
 integer on = TRUE;
 
