@@ -35,7 +35,6 @@ default
     }
     timer()
     {
-        llSay(0, "Timer.");
         randomMoo();
     }
 }
