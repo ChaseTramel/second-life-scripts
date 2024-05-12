@@ -1,4 +1,8 @@
-list mooKeys = ["34c35a16-0404-ef4d-86ce-3636ecbd06a5", "720e3dea-f86c-7870-6be6-a84fdc8035bc", "720e3dea-f86c-7870-6be6-a84fdc8035bc", "c8e29e41-2b49-bbea-67cf-c0a2079d5bc5", "fa204159-cb01-d075-17bf-9b8a4e7b6ad5",
+list mooKeys = ["34c35a16-0404-ef4d-86ce-3636ecbd06a5",
+"720e3dea-f86c-7870-6be6-a84fdc8035bc",
+"720e3dea-f86c-7870-6be6-a84fdc8035bc",
+"c8e29e41-2b49-bbea-67cf-c0a2079d5bc5",
+"fa204159-cb01-d075-17bf-9b8a4e7b6ad5",
 "522b88f6-d3b4-aaa7-e4fd-d6ede30290bb",
 "22b83c43-8def-1258-ecd0-161f69e5e658"
 ];
