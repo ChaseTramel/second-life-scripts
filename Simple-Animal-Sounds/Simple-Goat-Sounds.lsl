@@ -1,4 +1,9 @@
-list soundKeys = [];
+list soundKeys = [
+    "43851c72-1e5e-caf1-24f5-6d1f73baffa7",
+    "82fcece7-14dd-d079-5c67-6eec86d5adf5",
+    "02cb944a-48a3-83e0-1046-e49239cf110f",
+    "184187f3-89cf-b9db-c1f0-77c104629c01"
+];
 
 float volume = 0.6;
 
@@ -26,7 +31,6 @@ default
     }
     timer()
     {
-        llSay(0, "Timer.");
         randomSound();
     }
 }
