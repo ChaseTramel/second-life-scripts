@@ -14,7 +14,7 @@ integer timeGap = 60;
 float randomness = 60.0;
 
 randomMoo() {
-    llSay(0, "Moo");
+    llSay(0, "Moo.");
     integer index = (integer)llFrand((float)llGetListLength(mooKeys));
     string mooKey = llList2String(mooKeys, index);
     llPlaySound(mooKey, volume);

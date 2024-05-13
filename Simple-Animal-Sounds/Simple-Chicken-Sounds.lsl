@@ -13,7 +13,7 @@ integer timeGap = 60;
 float randomness = 60.0;
 
 randomSound() {
-    llSay(0, "Cluck cluck.");
+    llSay(0, "Cluck Cluck.");
     integer index = (integer)llFrand((float)llGetListLength(soundKeys));
     string soundKey = llList2String(soundKeys, index);
     llPlaySound(soundKey, volume);
