@@ -1,11 +1,11 @@
 integer moving;
-float high = 0.15;
-float med = 0.10;
-float low = 0.05;
+float high = 0.10;
+float med = 0.05;
+float low = 0.01;
 float off = 0.00;
 vector white = <1, 1, 1>;  
 integer counter;
-integer face = 5;
+integer face = 6;
 
 QuickBlink() {
     counter++;
