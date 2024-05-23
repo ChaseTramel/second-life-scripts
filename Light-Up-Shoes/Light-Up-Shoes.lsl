@@ -1,8 +1,8 @@
 integer moving;
-float high = 0.3;
-float med = 0.2;
-float low = 0.1;
-float off = 0.0;
+float high = 0.15;
+float med = 0.10;
+float low = 0.05;
+float off = 0.00;
 vector white = <1, 1, 1>;  
 integer counter;
 integer face = 5;
@@ -11,18 +11,18 @@ QuickBlink() {
     counter++;
     if (EvenNumber(counter)) {
         llSetPrimitiveParams([
-            PRIM_GLOW, 5, high,
+            PRIM_GLOW, face, high,
             PRIM_POINT_LIGHT, TRUE, white, high, 3, .75 ]);
         return;
     } else {
-        BlinkOff();
+        SteadyLightUp();
     }
 }
 SlowBlink() {
     counter++;
     if (NotDivisibleByFive(counter)) {
         llSetPrimitiveParams([
-            PRIM_GLOW, 5, med,
+            PRIM_GLOW, face, med,
             PRIM_POINT_LIGHT, TRUE, white, med, 3, .75 ]);
     } else {
         BlinkOff();
@@ -31,12 +31,12 @@ SlowBlink() {
 
 SteadyLightUp() {
     llSetPrimitiveParams([
-        PRIM_GLOW, 5, low,
+        PRIM_GLOW, face, low,
         PRIM_POINT_LIGHT, TRUE, white, low, 3, .75 ]);
 }
 BlinkOff() {
     llSetPrimitiveParams([
-        PRIM_GLOW, 5, off,
+        PRIM_GLOW, face, off,
         PRIM_POINT_LIGHT, TRUE, white, off, 3, .75 ]);
 }
 
