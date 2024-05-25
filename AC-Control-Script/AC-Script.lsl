@@ -57,24 +57,20 @@ default
             if (heaterOn == FALSE) {
                 heaterOn = TRUE;
                 llRegionSay(messageChannel, "heatOn");
-                llOwnerSay("The Heater has been turned on.");
                 llListenRemove(dialogListener);
             } else if (heaterOn == TRUE) {
                 heaterOn = FALSE;
                 llRegionSay(messageChannel, "heatOff");
-                llOwnerSay("The Heater has been turned off.");
                 llListenRemove(dialogListener);
             }
         } else if (message == "AC On/Off") { 
             if (coolOn == FALSE) {
                 coolOn = TRUE;
                 llRegionSay(messageChannel, "coolOn");
-                llOwnerSay("The AC has been turned on.");
                 llListenRemove(dialogListener);
             } else if (coolOn == TRUE) {
                 coolOn = FALSE;
                 llRegionSay(messageChannel, "coolOff");
-                llOwnerSay("The AC has been turned off.");
                 llListenRemove(dialogListener);
             } 
         }
@@ -82,13 +78,11 @@ default
             if (mistOn == FALSE) {
                 mistOn = TRUE;
                 llRegionSay(messageChannel, "mistOn");
-                llOwnerSay("The mist has been turned on.");
                 llListenRemove(dialogListener);
             } 
             else if (mistOn == TRUE) {
                 mistOn = FALSE;
                 llRegionSay(messageChannel, "mistOff");
-                llOwnerSay("The mist has been turned off.");
                 llListenRemove(dialogListener);
             }
         }
@@ -97,8 +91,13 @@ default
             coolOn = FALSE;
             mistOn = FALSE;
             llRegionSay(messageChannel, "stop");
-            llOwnerSay("Everything has been turned off.");
             llListenRemove(dialogListener);
         }
     }
+    changed(integer change)
+    {
+        if (change & CHANGED_OWNER)
+            llResetScript();
+    }
+
 }

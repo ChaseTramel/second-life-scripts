@@ -1,3 +1,5 @@
+key ownerOfVent;
+key ownerOfController;
 integer heaterOn = FALSE;
 integer coolOn = FALSE;
 integer mistOn = FALSE;
@@ -16,71 +18,67 @@ makeCoolNoise() {
 }
 
 makeMistParticles() {
-    llParticleSystem([  PSYS_PART_MAX_AGE, 10.5,
-        PSYS_PART_FLAGS, PSYS_PART_EMISSIVE_MASK | PSYS_PART_INTERP_SCALE_MASK | PSYS_PART_INTERP_COLOR_MASK,
-        PSYS_PART_START_COLOR, <1, 1, 1>,
-        PSYS_PART_END_COLOR, <1, 1, 1>,
-        PSYS_PART_START_SCALE, <0.18,0.18,0.18>,
-        PSYS_PART_END_SCALE, <0,0,0>, 
-        PSYS_SRC_PATTERN, PSYS_SRC_PATTERN_EXPLODE,
-        PSYS_SRC_BURST_RATE, 0.0,
-        PSYS_SRC_ACCEL, <0,0,0>,
-        PSYS_SRC_BURST_PART_COUNT, 250,
-        PSYS_SRC_BURST_SPEED_MIN, 0.05,
-        PSYS_SRC_BURST_SPEED_MAX, 0.10,
-        PSYS_PART_START_ALPHA, 1.0,
-        PSYS_PART_MAX_AGE, 1.0,
-        PSYS_PART_START_GLOW, 0.10,
-        PSYS_PART_END_GLOW, 0.05
+    llParticleSystem([
+        PSYS_PART_FLAGS,            PSYS_PART_INTERP_COLOR_MASK | PSYS_PART_INTERP_SCALE_MASK | PSYS_PART_EMISSIVE_MASK | PSYS_PART_WIND_MASK,
+        PSYS_SRC_PATTERN,           PSYS_SRC_PATTERN_ANGLE,
+        PSYS_PART_START_COLOR,      <1.0, 1.0, 1.0>,
+        PSYS_PART_END_COLOR,        <1.0, 1.0, 1.0>,
+        PSYS_PART_START_ALPHA,      1.00,
+        PSYS_PART_END_ALPHA,        0.05,
+        PSYS_PART_START_SCALE,      <0.1, 0.1, 0.0>,
+        PSYS_PART_END_SCALE,        <10, 10, 0.0>,
+        PSYS_PART_MAX_AGE,          0.75,
+        PSYS_SRC_ACCEL,             <0.0, 0.0, 0.0>,
+        PSYS_SRC_ANGLE_BEGIN,       0.0,
+        PSYS_SRC_ANGLE_END,         0.0,
+        PSYS_SRC_BURST_PART_COUNT,  1,
+        PSYS_SRC_BURST_RADIUS,      0.0,
+        PSYS_SRC_OMEGA,             <0.0, 0.0, 0.0>
         ]);
-}
+ }
 
 default
 {
     state_entry()
     {
-        llListen(channel, "AC Controller", NULL_KEY, "");
+        ownerOfVent = llGetOwner();
+        listener = llListen(channel, "", NULL_KEY, "");
     }
     listen(integer channel, string name, key id, string message)
     {
-        if (message == "heatOn")
+        ownerOfController = llGetOwnerKey(id);
+        if (message == "heatOn" && ownerOfVent == ownerOfController)
         {
             llStopSound( );
             heaterOn = TRUE;
             coolOn =  FALSE;
-            llOwnerSay("The heater kicked on.");
             makeHeaterNoise();
         }
-        else if (message == "heatOff")
+        else if (message == "heatOff" && ownerOfVent == ownerOfController)
         {
             heaterOn = FALSE;
-            llOwnerSay("The heater stopped.");
             llStopSound( );
         }
-        else if (message == "coolOn")
+        else if (message == "coolOn" && ownerOfVent == ownerOfController)
         {
             llStopSound();
             coolOn = TRUE;
             heaterOn = FALSE;
-            llOwnerSay("The AC kicked on.");
             makeCoolNoise();
         }
-        else if (message == "coolOff")
+        else if (message == "coolOff" && ownerOfVent == ownerOfController)
         {
             coolOn = FALSE;
-            llOwnerSay("The AC stopped.");
             llStopSound( );
         }
-        else if (message == "mistOn")
+        else if (message == "mistOn" && ownerOfVent == ownerOfController)
         {
             mistOn = TRUE;
-            llOwnerSay("The mist started spaying.");
             makeMistParticles();
         }
-        else if (message == "mistOff")
+        else if (message == "mistOff" && ownerOfVent == ownerOfController)
         {
             mistOn = FALSE;
-            llOwnerSay("The mist stopped spaying.");
             llParticleSystem([]);
         }
         else if (message == "stop")
@@ -88,9 +86,13 @@ default
             heaterOn = FALSE;
             coolOn = FALSE;
             mistOn = FALSE;
-            llOwnerSay("Everything stopped.");
             llStopSound( );
             llParticleSystem([]);
         }
+    }
+    changed(integer change)
+    {
+        if (change & CHANGED_OWNER)
+            llResetScript();
     }
 }
