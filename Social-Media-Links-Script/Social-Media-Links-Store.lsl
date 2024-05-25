@@ -1,15 +1,15 @@
 
-integer marketplaceButton = 2;
-integer facebookButton = 19;
-integer instagramButton = 13;
-integer flickrButton = 17;
-integer emailButton = 1;
+integer marketplaceButton = 5;
+integer facebookButton = 3;
+integer instagramButton = 2;
+integer flickrButton = 1;
+integer questionButton = 4;
 
 string marketplaceURL = "https://marketplace.secondlife.com/stores/244066";
 string facebookURL = "https://www.facebook.com/profile.php?id=100087757505302";
 string instagramURL = "https://www.instagram.com/littlepawssecondlife/";
 string flickrURL = "https://www.flickr.com/photos/196727381@N04/";
-string contactNotecard = "Littlepaws Contact Information";
+string contactNotecard = "Contact Information - Littlepaws";
 
 GiveResult (integer touchedButton, key toucher) {
     if (touchedButton == marketplaceButton) {
@@ -33,7 +33,7 @@ default {
     touch_start (integer toucherQuant) {
         key toucher = llDetectedKey(0);
         integer touchedButton = llDetectedLinkNumber(0);
-        llOwnerSay((string)touchedButton);
+        llOwnerSay(llGetUsername(toucher) + " touched a social media button!");
         GiveResult(touchedButton, toucher);
     }
 }
