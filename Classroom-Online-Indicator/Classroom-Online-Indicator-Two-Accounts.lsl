@@ -46,6 +46,7 @@ default
         } else {
             llInstantMessage(toucher, "Mr. Chase is offline. Here's a notecard with his contact information. Please feel free to contact him!");
             if (llGetInventoryType(notecard) == INVENTORY_NOTECARD) {
+                llInstantMessage(secondAccount, llGetUsername(toucher) + " needs help in your classroom.");
                 llGiveInventory(toucher, notecard);
             } else {
                 llInstantMessage(toucher, "Sorry, I couldn't find the notecard. Please contact Mr. Chase directly.");
