@@ -1,6 +1,6 @@
 integer poster = 1;
 integer ownerOnline;
-key account = "0cd1d5d1-235a-4f0e-bf20-75b7ed4b5942";
+key account = "fb9d02b2-44e7-408b-9f9d-f43d61a899b0";
 string notecard = "Godmamma's MyStory Market Contact Information";
 key queryID;
 
