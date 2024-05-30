@@ -44,6 +44,9 @@ integer talkChannel = -456789;
 
 default
 {
+    on_rez( integer param) {
+        llResetScript();
+    }
     state_entry()
     {
         listener = llListen(talkChannel, "Light Up Toddler Shoes HUD", "", "");

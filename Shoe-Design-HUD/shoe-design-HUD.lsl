@@ -19,6 +19,9 @@ integer talkChannel = -456789;
 
 default
 {
+    on_rez( integer param) {
+        llResetScript();
+    }
     touch_start( integer numTouchers )
     {
         if(llDetectedLinkNumber(0) == paButton) {

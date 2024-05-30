@@ -3,16 +3,18 @@ float high = 0.10;
 float med = 0.05;
 float low = 0.01;
 float off = 0.00;
-vector white = <1, 1, 1>;  
+vector color = <1.0, 1.0, 1.0>;  
 integer counter;
 integer face = 6;
+integer listener;
+integer talkChannel = -456789;
 
 QuickBlink() {
     counter++;
     if (EvenNumber(counter)) {
         llSetPrimitiveParams([
             PRIM_GLOW, face, high,
-            PRIM_POINT_LIGHT, TRUE, white, high, 3, .75 ]);
+            PRIM_POINT_LIGHT, TRUE, color, high, 3, .75 ]);
         return;
     } else {
         SteadyLightUp();
@@ -23,7 +25,7 @@ SlowBlink() {
     if (NotDivisibleByFive(counter)) {
         llSetPrimitiveParams([
             PRIM_GLOW, face, med,
-            PRIM_POINT_LIGHT, TRUE, white, med, 3, .75 ]);
+            PRIM_POINT_LIGHT, TRUE, color, med, 3, .75 ]);
     } else {
         BlinkOff();
     }
@@ -32,12 +34,12 @@ SlowBlink() {
 SteadyLightUp() {
     llSetPrimitiveParams([
         PRIM_GLOW, face, low,
-        PRIM_POINT_LIGHT, TRUE, white, low, 3, .75 ]);
+        PRIM_POINT_LIGHT, TRUE, color, low, 3, .75 ]);
 }
 BlinkOff() {
     llSetPrimitiveParams([
         PRIM_GLOW, face, off,
-        PRIM_POINT_LIGHT, TRUE, white, off, 3, .75 ]);
+        PRIM_POINT_LIGHT, TRUE, color, off, 3, .75 ]);
 }
 
 integer EvenNumber(integer number) {
@@ -64,6 +66,7 @@ default {
         BlinkOff();
         counter = 0;
         llSetTimerEvent(.1);
+        listener = llListen(talkChannel, "", "", "");
     }
     moving_start() {
         moving = TRUE;
@@ -83,6 +86,26 @@ default {
         } else {
             // llOwnerSay("not blinking");
             counter = 0;
+            BlinkOff();
+        }
+    }
+    listen( integer channel, string name, key id, string message )
+    {
+        llSetTimerEvent(.1);
+        if (message == "white") {
+            color = <1.0, 1.0, 1.0>;
+        } else if (message == "blue") {
+            color = <0.0, 0.0, 1.0>;
+        } else if (message == "green") {
+            color = <0.0, 1.0, 0.0>;
+        } else if (message == "red") {
+            color = <1.0, 0.0, 0.0>;
+        } else if (message == "yellow") {
+            color = <1.0, 1.0, 0.0>;
+        } else if (message == "pink") {
+            color = <1.0, 0.0, 1.0>;
+        } else if (message == "off") {
+            llSetTimerEvent(0.0);
             BlinkOff();
         }
     }
