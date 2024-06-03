@@ -5,7 +5,7 @@ float low = 0.01;
 float off = 0.00;
 vector white = <1, 1, 1>;  
 integer counter;
-integer face = 1;
+integer face = 0;
 
 QuickBlink() {
     counter++;
